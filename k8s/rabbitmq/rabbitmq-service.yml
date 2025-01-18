@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: cloud-platform
+spec:
+  ports:
+  - port: 15672       # Management Console
+    targetPort: 15672
+    name: management
+  - port: 5672        # Message Queue
+    targetPort: 5672
+    name: queue
+  selector:
+    app: rabbitmq
+  type: ClusterIP      # Change to NodePort or LoadBalancer if external access is required
