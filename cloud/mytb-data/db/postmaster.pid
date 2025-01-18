@@ -1,8 +1,8 @@
-30
+12
 /data/db
-1737207656
+1737213993
 5432
 /var/run/postgresql
 localhost
-  5432001         4
-ready   
+  5432001         0
+starting
