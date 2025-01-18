@@ -2,17 +2,17 @@ version: '3.8'
 
 services:
   minio:
-    image: minio/minio
+    image: minio/minio:latest
     container_name: minio
     environment:
-      MINIO_ACCESS_KEY: your-access-key
-      MINIO_SECRET_KEY: your-secret-key
+      MINIO_ROOT_USER: username  # Replace with your username
+      MINIO_ROOT_PASSWORD: password  # Replace with your password
     ports:
-      - "9000:9000"  # MinIO Web UI
+      - "9000:9000"  # MinIO Web Interface
       - "9001:9001"  # MinIO Console
     volumes:
-      - minio-data:/data
-    command: server /data
+      - minio-data:/data  # Persistent data storage
+    command: server /data --console-address ":9001"  # Bind WebUI to port 9001
     restart: unless-stopped
 
 volumes:
