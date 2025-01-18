@@ -9,7 +9,7 @@ from io import BytesIO  # Import BytesIO to handle data as file-like object
 minio_client = Minio(
     "localhost:9000",
     access_key="admin",
-    secret_key="admin123",
+    secret_key="password",
     secure=False  # Set to True if using HTTPS
 )
 
