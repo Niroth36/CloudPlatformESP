@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - NODE_RED_ENABLE_USERNAME_AND_PASSWORD=true
+      - NODE_RED_USERNAME=admin
+      - NODE_RED_PASSWORD=admin
+    ports:
+      - "1880:1880"   # Exposes Node-RED dashboard on port 1880
+    volumes:
+      - ./data:/data   # Persists Node-RED data (flows, settings, etc.)
+    networks:
+      - nodered-net
+    restart: always
+
+networks:
+  nodered-net:
+    driver: bridge

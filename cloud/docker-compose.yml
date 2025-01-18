@@ -1,0 +1,87 @@
+version: '3.8'
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  minio-data:
+    external: false
+  mytb-data:
+    external: true
+  mytb-logs:
+    external: true
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=password
+      - KEYCLOAK_LISTENERS_HTTP=8080
+    ports:
+      - "8090:8080"  # Mapping internal port 8080 to external 8090
+    command:
+      - start-dev  # Use start-dev to avoid HTTPS and run in development mode
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: admin  # Replace with your username
+      MINIO_ROOT_PASSWORD: password  # Replace with your password
+    ports:
+      - "9000:9000"  # MinIO Web Interface
+      - "9001:9001"  # MinIO Console
+    volumes:
+      - minio-data:/data  # Persistent data storage
+    command: server /data --console-address ":9001"  # Bind WebUI to port 9001
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - NODE_RED_ENABLE_USERNAME_AND_PASSWORD=true
+      - NODE_RED_USERNAME=admin
+      - NODE_RED_PASSWORD=password
+    ports:
+      - "1880:1880"   # Exposes Node-RED dashboard on port 1880
+    volumes:
+      - ./nodered-data:/data   # Persists Node-RED data (flows, settings, etc.)
+    networks:
+      - app-network
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"  # RabbitMQ Management Console
+      - "5672:5672"    # RabbitMQ Message Queue
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  mytb:
+    image: "thingsboard/tb-postgres"
+    container_name: mytb
+    ports:
+      - "8091:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: in-memory
+    volumes:
+      - ./mytb-data:/data
+      - ./mytb-logs:/var/log/thingsboard
+    networks:
+      - app-network
+    restart: always
