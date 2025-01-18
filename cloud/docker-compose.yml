@@ -1,78 +1,87 @@
 version: '3.8'
 
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  minio-data:
+    external: false
+  mytb-data:
+    external: true
+  mytb-logs:
+    external: true
+
 services:
-  # # ThingsBoard PostgreSQL Database
-  # thingsboard-db:
-  #   image: postgres:latest
-  #   container_name: thingsboard-db
-  #   environment:
-  #     POSTGRES_DB: thingsboard
-  #     POSTGRES_USER: tb_user
-  #     POSTGRES_PASSWORD: tb_password
-  #   volumes:
-  #     - thingsboard-db-data:/var/lib/postgresql/data
-  #   restart: unless-stopped
-
-  # # ThingsBoard Service
-  # thingsboard:
-  #   image: thingsboard/tb-postgres
-  #   container_name: thingsboard
-  #   environment:
-  #     TB_DB_HOST: thingsboard-db
-  #     TB_DB_USER: tb_user
-  #     TB_DB_PASSWORD: tb_password
-  #     TB_QUEUE_TYPE: rdb
-  #   depends_on:
-  #     - thingsboard-db
-  #   ports:
-  #     - "8580:8580"  # ThingsBoard Web UI
-  #   restart: unless-stopped
-
-  # Keycloak Service
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_LISTENERS_HTTP=8080
     ports:
-      - "8081:8081"  # Keycloak Web UI
+      - "8090:8080"  # Mapping internal port 8080 to external 8090
+    command:
+      - start-dev  # Use start-dev to avoid HTTPS and run in development mode
+    networks:
+      - app-network
     restart: unless-stopped
 
-  # RabbitMQ Service (for messaging)
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: username  # Replace with your username
+      MINIO_ROOT_PASSWORD: password  # Replace with your password
+    ports:
+      - "9000:9000"  # MinIO Web Interface
+      - "9001:9001"  # MinIO Console
+    volumes:
+      - minio-data:/data  # Persistent data storage
+    command: server /data --console-address ":9001"  # Bind WebUI to port 9001
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - NODE_RED_ENABLE_USERNAME_AND_PASSWORD=true
+      - NODE_RED_USERNAME=admin
+      - NODE_RED_PASSWORD=admin
+    ports:
+      - "1880:1880"   # Exposes Node-RED dashboard on port 1880
+    volumes:
+      - ./nodered-data:/data   # Persists Node-RED data (flows, settings, etc.)
+    networks:
+      - app-network
+    restart: always
+
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
     ports:
       - "15672:15672"  # RabbitMQ Management Console
       - "5672:5672"    # RabbitMQ Message Queue
+    networks:
+      - app-network
     restart: unless-stopped
 
-  # MinIO Service (object storage)
-  minio:
-    image: minio/minio
-    container_name: minio
-    environment:
-      MINIO_ACCESS_KEY: your-access-key
-      MINIO_SECRET_KEY: your-secret-key
+  mytb:
+    image: "thingsboard/tb-postgres"
+    container_name: mytb
     ports:
-      - "9000:9000"  # MinIO Web UI
-      - "9001:9001"  # MinIO Console
-    command: server /data
+      - "8091:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: in-memory
     volumes:
-      - minio-data:/data
-    restart: unless-stopped
-
-  # Node-RED Service
-  nodered:
-    image: nodered/node-red
-    container_name: nodered
-    environment:
-      - FOLDER=./data
-    ports:
-      - "8990:8990"  # Node-RED Web UI
-    restart: unless-stopped
-
-volumes:
-  thingsboard-db-data:
-  minio-data:
+      - ./mytb-data:/data
+      - ./mytb-logs:/var/log/thingsboard
+    networks:
+      - app-network
+    restart: always
