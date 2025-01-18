@@ -32,6 +32,13 @@ spec:
         volumeMounts:
         - name: minio-data
           mountPath: /data
+        resources:
+          requests:
+            memory: "1Gi"  
+            cpu: "500m"      
+          limits:
+            memory: "2Gi"    
+            cpu: "1"      
         livenessProbe:
           httpGet:
             path: /minio/health/live
