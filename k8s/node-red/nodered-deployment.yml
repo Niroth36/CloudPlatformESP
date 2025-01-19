@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodered
+  namespace: cloud-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodered
+  template:
+    metadata:
+      labels:
+        app: nodered
+    spec:
+      containers:
+      - name: nodered
+        image: nodered/node-red:latest
+        ports:
+        - containerPort: 1880
+        env:
+        - name: NODE_RED_ENABLE_PROJECTS
+          value: "true"  # Enable projects
+        - name: NODE_RED_ENABLE_USERNAME_AND_PASSWORD
+          value: "true"
+        - name: NODE_RED_USERNAME
+          value: "admin"  # Replace with your desired username
+        - name: NODE_RED_PASSWORD
+          value: "password"  # Replace with your desired password
+        volumeMounts:
+        - name: nodered-data
+          mountPath: /data
+        resources:
+          requests:
+            memory: "1Gi"  
+            cpu: "500m"      
+          limits:
+            memory: "2Gi"    
+            cpu: "1"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 1880
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 1880
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: nodered-data
+        persistentVolumeClaim:
+          claimName: nodered-pvc
