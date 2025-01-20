@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: thingsboard
+  namespace: cloud-platform
+spec:
+  ports:
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
+    name: web
+  - port: 1883
+    targetPort: 1883
+    protocol: TCP
+    name: mqtt
+  - port: 7070
+    targetPort: 7070
+    protocol: TCP
+    name: coap
+  - port: 5683
+    targetPort: 5683
+    protocol: UDP
+    name: lwm2m
+  selector:
+    app: thingsboard
+  type: ClusterIP

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thingsboard
+  namespace: cloud-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thingsboard
+  template:
+    metadata:
+      labels:
+        app: thingsboard
+    spec:
+      containers:
+      - name: thingsboard
+        image: thingsboard/tb-postgres
+        ports:
+        - containerPort: 9090   # Web UI
+        - containerPort: 7070   # CoAP
+        - containerPort: 5683   # LwM2M (UDP)
+        - containerPort: 1883   # MQTT
+        env:
+        - name: TB_QUEUE_TYPE
+          value: "in-memory"  # Use in-memory queue for simplicity; for production, use RabbitMQ or Kafka.
+        volumeMounts:
+        - name: thingsboard-data
+          mountPath: /data
+        - name: thingsboard-logs
+          mountPath: /var/log/thingsboard
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9090
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9090
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: thingsboard-data
+        persistentVolumeClaim:
+          claimName: thingsboard-data-pvc
+      - name: thingsboard-logs
+        persistentVolumeClaim:
+          claimName: thingsboard-logs-pvc
