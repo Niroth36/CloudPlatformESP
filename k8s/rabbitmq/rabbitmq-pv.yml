@@ -9,6 +9,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: hostpath
+  storageClassName: microk8s-hostpath
   hostPath:
     path: /mnt/data/cloud/rabbitmq  # Adjust this path as per your host setup
