@@ -13,4 +13,4 @@ spec:
     name: queue
   selector:
     app: rabbitmq
-  type: ClusterIP      # Change to NodePort or LoadBalancer if external access is required
+  clusterIP: None  # This ensures the Service works with the StatefulSet
