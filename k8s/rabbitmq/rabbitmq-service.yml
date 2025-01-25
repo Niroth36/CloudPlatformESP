@@ -13,4 +13,3 @@ spec:
     name: queue
   selector:
     app: rabbitmq
-  clusterIP: None  # This ensures the Service works with the StatefulSet
