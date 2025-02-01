@@ -2,5 +2,10 @@
     "name": "node-red-project",
     "description": "A Node-RED Project",
     "version": "0.0.1",
-    "private": true
+    "private": true,
+    "dependencies": {
+        "@5minds/node-red-contrib-processcube-amqp": "~0.9.0",
+        "@stormpass/node-red-contrib-amqp": "~1.4.1",
+        "node-red-contrib-rhea-robustel": "~0.1.1"
+    }
 }

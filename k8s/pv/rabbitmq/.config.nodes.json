@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "4.0.8",
+        "version": "3.1.4",
         "local": false,
         "user": false,
         "nodes": {
@@ -424,6 +424,81 @@
                 "user": false,
                 "module": "node-red",
                 "file": "/usr/src/node-red/node_modules/@node-red/nodes/core/storage/23-watch.js"
+            }
+        }
+    },
+    "@stormpass/node-red-contrib-amqp": {
+        "name": "@stormpass/node-red-contrib-amqp",
+        "version": "1.4.1",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "amqp-in": {
+                "name": "amqp-in",
+                "types": [
+                    "amqp-in"
+                ],
+                "enabled": false,
+                "local": true,
+                "user": false,
+                "module": "@stormpass/node-red-contrib-amqp",
+                "file": "/data/node_modules/@stormpass/node-red-contrib-amqp/build/src/nodes/amqp-in.js"
+            },
+            "amqp-out": {
+                "name": "amqp-out",
+                "types": [
+                    "amqp-out"
+                ],
+                "enabled": false,
+                "local": true,
+                "user": false,
+                "module": "@stormpass/node-red-contrib-amqp",
+                "file": "/data/node_modules/@stormpass/node-red-contrib-amqp/build/src/nodes/amqp-out.js"
+            },
+            "amqp-broker": {
+                "name": "amqp-broker",
+                "types": [
+                    "amqp-broker"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "@stormpass/node-red-contrib-amqp",
+                "file": "/data/node_modules/@stormpass/node-red-contrib-amqp/build/src/nodes/amqp-broker.js"
+            },
+            "amqp-in-manual-ack": {
+                "name": "amqp-in-manual-ack",
+                "types": [
+                    "amqp-in-manual-ack"
+                ],
+                "enabled": false,
+                "local": true,
+                "user": false,
+                "module": "@stormpass/node-red-contrib-amqp",
+                "file": "/data/node_modules/@stormpass/node-red-contrib-amqp/build/src/nodes/amqp-in-manual-ack.js"
+            }
+        }
+    },
+    "node-red-contrib-rhea-robustel": {
+        "name": "node-red-contrib-rhea-robustel",
+        "version": "0.1.1",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "edge2cloud": {
+                "name": "edge2cloud",
+                "types": [
+                    "amqp-sender",
+                    "amqp-receiver",
+                    "amqp-endpoint",
+                    "data-report",
+                    "control-request"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-rhea-robustel",
+                "file": "/data/node_modules/node-red-contrib-rhea-robustel/rhea/rhea.js"
             }
         }
     }

@@ -1,0 +1,165 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@8.19.4
+2 info using node@v16.20.2
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 2ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 1ms
+6 timing config:load:builtin Completed in 1ms
+7 warn config production Use `--omit=dev` instead.
+8 timing config:load:cli Completed in 3ms
+9 timing config:load:env Completed in 0ms
+10 timing config:load:file:/data/.npmrc Completed in 1ms
+11 timing config:load:project Completed in 2ms
+12 timing config:load:file:/usr/src/node-red/.npmrc Completed in 0ms
+13 timing config:load:user Completed in 0ms
+14 timing config:load:file:/usr/local/etc/npmrc Completed in 2ms
+15 timing config:load:global Completed in 2ms
+16 timing config:load:validate Completed in 0ms
+17 timing config:load:credentials Completed in 1ms
+18 timing config:load:setEnvs Completed in 1ms
+19 timing config:load Completed in 12ms
+20 timing npm:load:configload Completed in 12ms
+21 timing npm:load:mkdirpcache Completed in 6ms
+22 timing npm:load:mkdirplogs Completed in 0ms
+23 verbose title npm install node-red-contrib-amqp@1.0.2
+24 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--production" "--engine-strict" "node-red-contrib-amqp@1.0.2"
+25 timing npm:load:setTitle Completed in 1ms
+26 timing config:load:flatten Completed in 3ms
+27 timing npm:load:display Completed in 6ms
+28 verbose logfile logs-max:10 dir:/data/.npm/_logs
+29 verbose logfile /data/.npm/_logs/2025-02-01T13_28_34_491Z-debug-0.log
+30 timing npm:load:logFile Completed in 7ms
+31 timing npm:load:timers Completed in 0ms
+32 timing npm:load:configScope Completed in 0ms
+33 timing npm:load Completed in 34ms
+34 timing arborist:ctor Completed in 1ms
+35 silly logfile start cleaning logs, removing 4 files
+36 timing idealTree:init Completed in 28ms
+37 timing idealTree:userRequests Completed in 1ms
+38 silly idealTree buildDeps
+39 silly fetch manifest node-red-contrib-amqp@1.0.2
+40 silly logfile done cleaning log files
+41 timing arborist:ctor Completed in 0ms
+42 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-amqp 846ms (cache miss)
+43 silly placeDep ROOT node-red-contrib-amqp@1.0.2 OK for: node-red-project@0.0.1 want: 1.0.2
+44 silly fetch manifest amqp-ts@^1.0.0
+45 silly fetch manifest getos@^3.1.1
+46 http fetch GET 200 https://registry.npmjs.org/getos 138ms (cache miss)
+47 http fetch GET 200 https://registry.npmjs.org/amqp-ts 696ms (cache miss)
+48 timing idealTree:#root Completed in 1552ms
+49 silly placeDep ROOT amqp-ts@1.8.0 OK for: node-red-contrib-amqp@1.0.2 want: ^1.0.0
+50 silly placeDep ROOT getos@3.2.1 OK for: node-red-contrib-amqp@1.0.2 want: ^3.1.1
+51 silly fetch manifest @types/node@^12.7.2
+52 silly fetch manifest amqplib@^0.4.1
+53 silly fetch manifest bluebird@^3.3.5
+54 silly fetch manifest winston@^2.2.0
+55 silly fetch manifest async@^3.2.0
+56 http fetch GET 200 https://registry.npmjs.org/async 71ms (cache miss)
+57 http fetch GET 200 https://registry.npmjs.org/bluebird 82ms (cache miss)
+58 http fetch GET 200 https://registry.npmjs.org/winston 137ms (cache miss)
+59 http fetch GET 200 https://registry.npmjs.org/amqplib 166ms (cache miss)
+60 http fetch GET 200 https://registry.npmjs.org/@types%2fnode 348ms (cache miss)
+61 timing idealTree:node_modules/node-red-contrib-amqp Completed in 394ms
+62 silly placeDep ROOT @types/node@12.20.55 OK for: amqp-ts@1.8.0 want: ^12.7.2
+63 silly placeDep node_modules/amqp-ts amqplib@0.4.2 OK for: amqp-ts@1.8.0 want: ^0.4.1
+64 silly placeDep ROOT bluebird@3.7.2 OK for: amqp-ts@1.8.0 want: ^3.3.5
+65 silly placeDep ROOT winston@2.4.7 OK for: amqp-ts@1.8.0 want: ^2.2.0
+66 silly fetch manifest when@~3.6.2
+67 silly fetch manifest bitsyntax@~0.0.4
+68 silly fetch manifest readable-stream@1.x >=1.1.9
+69 silly fetch manifest buffer-more-ints@0.0.2
+70 silly fetch manifest eyes@0.1.x
+71 silly fetch manifest async@^2.6.4
+72 silly fetch manifest cycle@1.0.x
+73 silly fetch manifest colors@1.0.x
+74 silly fetch manifest isstream@0.1.x
+75 silly fetch manifest stack-trace@0.0.x
+76 http fetch GET 200 https://registry.npmjs.org/readable-stream 68ms (cache miss)
+77 http fetch GET 200 https://registry.npmjs.org/cycle 98ms (cache miss)
+78 http fetch GET 200 https://registry.npmjs.org/when 108ms (cache miss)
+79 http fetch GET 200 https://registry.npmjs.org/stack-trace 113ms (cache miss)
+80 http fetch GET 200 https://registry.npmjs.org/eyes 135ms (cache miss)
+81 http fetch GET 200 https://registry.npmjs.org/isstream 141ms (cache miss)
+82 http fetch GET 200 https://registry.npmjs.org/colors 167ms (cache miss)
+83 http fetch GET 200 https://registry.npmjs.org/bitsyntax 671ms (cache miss)
+84 http fetch GET 200 https://registry.npmjs.org/buffer-more-ints 671ms (cache miss)
+85 timing idealTree:node_modules/amqp-ts Completed in 682ms
+86 timing idealTree:node_modules/@types/node Completed in 0ms
+87 timing idealTree:node_modules/bluebird Completed in 1ms
+88 silly placeDep ROOT async@3.2.6 OK for: getos@3.2.1 want: ^3.2.0
+89 timing idealTree:node_modules/getos Completed in 2ms
+90 timing idealTree:node_modules/async Completed in 0ms
+91 silly placeDep node_modules/winston async@2.6.4 OK for: winston@2.4.7 want: ^2.6.4
+92 silly placeDep ROOT colors@1.0.3 OK for: winston@2.4.7 want: 1.0.x
+93 silly placeDep ROOT cycle@1.0.3 OK for: winston@2.4.7 want: 1.0.x
+94 silly placeDep ROOT eyes@0.1.8 OK for: winston@2.4.7 want: 0.1.x
+95 silly placeDep ROOT isstream@0.1.2 OK for: winston@2.4.7 want: 0.1.x
+96 silly placeDep ROOT stack-trace@0.0.10 OK for: winston@2.4.7 want: 0.0.x
+97 silly fetch manifest lodash@^4.17.14
+98 http fetch GET 200 https://registry.npmjs.org/lodash 116ms (cache miss)
+99 timing idealTree:node_modules/winston Completed in 126ms
+100 timing idealTree:node_modules/colors Completed in 0ms
+101 timing idealTree:node_modules/cycle Completed in 1ms
+102 timing idealTree:node_modules/eyes Completed in 0ms
+103 timing idealTree:node_modules/isstream Completed in 0ms
+104 timing idealTree:node_modules/stack-trace Completed in 0ms
+105 silly placeDep ROOT bitsyntax@0.0.4 OK for: amqplib@0.4.2 want: ~0.0.4
+106 silly placeDep node_modules/amqp-ts buffer-more-ints@0.0.2 OK for: amqplib@0.4.2 want: 0.0.2
+107 silly placeDep ROOT readable-stream@1.1.14 OK for: amqplib@0.4.2 want: 1.x >=1.1.9
+108 silly placeDep ROOT when@3.6.4 OK for: amqplib@0.4.2 want: ~3.6.2
+109 silly fetch manifest isarray@0.0.1
+110 silly fetch manifest inherits@~2.0.1
+111 silly fetch manifest core-util-is@~1.0.0
+112 silly fetch manifest string_decoder@~0.10.x
+113 http fetch GET 200 https://registry.npmjs.org/string_decoder 52ms (cache miss)
+114 http fetch GET 200 https://registry.npmjs.org/isarray 65ms (cache miss)
+115 http fetch GET 200 https://registry.npmjs.org/core-util-is 92ms (cache miss)
+116 http fetch GET 200 https://registry.npmjs.org/inherits 107ms (cache miss)
+117 timing idealTree:node_modules/amqp-ts/node_modules/amqplib Completed in 118ms
+118 silly placeDep node_modules/bitsyntax buffer-more-ints@0.0.2 OK for: bitsyntax@0.0.4 want: 0.0.2
+119 timing idealTree:node_modules/bitsyntax Completed in 1ms
+120 silly placeDep ROOT core-util-is@1.0.3 OK for: readable-stream@1.1.14 want: ~1.0.0
+121 silly placeDep ROOT inherits@2.0.4 OK for: readable-stream@1.1.14 want: ~2.0.1
+122 silly placeDep ROOT isarray@0.0.1 OK for: readable-stream@1.1.14 want: 0.0.1
+123 silly placeDep ROOT string_decoder@0.10.31 OK for: readable-stream@1.1.14 want: ~0.10.x
+124 timing idealTree:node_modules/readable-stream Completed in 5ms
+125 timing idealTree:node_modules/core-util-is Completed in 0ms
+126 timing idealTree:node_modules/inherits Completed in 0ms
+127 timing idealTree:node_modules/isarray Completed in 0ms
+128 timing idealTree:node_modules/string_decoder Completed in 1ms
+129 timing idealTree:node_modules/when Completed in 0ms
+130 timing idealTree:node_modules/amqp-ts/node_modules/buffer-more-ints Completed in 0ms
+131 timing idealTree:node_modules/bitsyntax/node_modules/buffer-more-ints Completed in 0ms
+132 silly placeDep ROOT lodash@4.17.21 OK for: async@2.6.4 want: ^4.17.14
+133 timing idealTree:node_modules/winston/node_modules/async Completed in 2ms
+134 timing idealTree:node_modules/lodash Completed in 0ms
+135 timing idealTree:buildDeps Completed in 2887ms
+136 timing idealTree:fixDepFlags Completed in 1ms
+137 timing idealTree Completed in 2920ms
+138 timing command:install Completed in 2928ms
+139 verbose stack Error: Unsupported engine
+139 verbose stack     at checkEngine (/usr/local/lib/node_modules/npm/node_modules/npm-install-checks/lib/index.js:14:25)
+139 verbose stack     at Arborist.[checkEngineAndPlatform] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:228:11)
+139 verbose stack     at Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:214:42)
+139 verbose stack     at async Promise.all (index 1)
+139 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:154:5)
+139 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:145:5)
+139 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli.js:78:5)
+140 verbose pkgid amqplib@0.4.2
+141 verbose cwd /data
+142 verbose Linux 6.8.0-52-generic
+143 verbose node v16.20.2
+144 verbose npm  v8.19.4
+145 error code EBADENGINE
+146 error engine Unsupported engine
+147 error engine Not compatible with your version of node/npm: amqplib@0.4.2
+148 error notsup Not compatible with your version of node/npm: amqplib@0.4.2
+148 error notsup Required: {"node":">=0.8 <6 || ^6"}
+148 error notsup Actual:   {"npm":"8.19.4","node":"v16.20.2"}
+149 verbose exit 1
+150 timing npm Completed in 3058ms
+151 verbose unfinished npm timer reify 1738416514621
+152 verbose unfinished npm timer reify:loadTrees 1738416514625
+153 verbose code 1
+154 error A complete log of this run can be found in:
+154 error     /data/.npm/_logs/2025-02-01T13_28_34_491Z-debug-0.log

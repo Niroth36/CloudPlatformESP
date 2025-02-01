@@ -1,0 +1,20 @@
+[
+    {
+        "id": "0972406b2eb4ccce",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "34d4901295d35bba",
+        "type": "amqp-broker",
+        "name": "rabbitmq",
+        "host": "rabbitmq.cloud-platform.svc.cluster.local",
+        "port": 5672,
+        "vhost": "",
+        "tls": false,
+        "credsFromSettings": false
+    }
+]

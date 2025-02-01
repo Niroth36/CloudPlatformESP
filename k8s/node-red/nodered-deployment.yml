@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodered
-        image: nodered/node-red:latest
+        image: nodered/node-red:3.1.4
         ports:
         - containerPort: 1880
         env:
@@ -32,23 +32,23 @@ spec:
           mountPath: /data
         resources:
           requests:
-            memory: "1Gi"  
-            cpu: "500m"      
+            memory: "2Gi"  
+            cpu: "1"      
           limits:
-            memory: "2Gi"    
-            cpu: "1"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 1880
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 1880
-          initialDelaySeconds: 30
-          periodSeconds: 10
+            memory: "4Gi"    
+            cpu: "2"
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 1880
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 1880
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
       volumes:
       - name: nodered-data
         persistentVolumeClaim:
