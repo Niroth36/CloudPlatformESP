@@ -19,19 +19,19 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: KEYCLOAK_ADMIN
+        - name: KC_BOOTSTRAP_ADMIN_USERNAME
           value: "admin"
-        - name: KEYCLOAK_ADMIN_PASSWORD
+        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
           value: "password"
         args:
         - start-dev
         resources:
           requests:
-            memory: "1Gi"
-            cpu: "500m"
+            memory: "3Gi"
+            cpu: "2"
           limits:
-            memory: "2Gi"
-            cpu: "1"
+            memory: "4Gi"
+            cpu: "3"
         livenessProbe:
           httpGet:
             path: /
