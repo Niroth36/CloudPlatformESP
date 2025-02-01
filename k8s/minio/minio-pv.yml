@@ -11,4 +11,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: hostpath
   hostPath:
-    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/minio
+    path: /home/axilleas/Documents/Projects/CloudPlatformESP/k8s/pv/minio
