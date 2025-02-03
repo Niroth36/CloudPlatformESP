@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-pv
+  name: keycloak-postgres-pv
   namespace: cloud-platform
 spec:
   capacity:
@@ -9,6 +9,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: hostpath
-  hostPath:
-    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/minio
+  hostPath: # For local testing. Use cloud storage in production.
+    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/keycloak

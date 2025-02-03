@@ -1,47 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: keycloak
+  name: keycloak-postgres
   namespace: cloud-platform
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak
+      app: keycloak-postgres
   template:
     metadata:
       labels:
-        app: keycloak
+        app: keycloak-postgres
     spec:
       containers:
-      - name: keycloak
-        image: quay.io/keycloak/keycloak:latest
+      - name: postgres
+        image: postgres:15
         ports:
-        - containerPort: 8080
+        - containerPort: 5432
         env:
-        - name: KC_BOOTSTRAP_ADMIN_USERNAME
-          value: "admin"
-        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
-          value: "password"
-        args:
-        - start-dev
-        resources:
-          requests:
-            memory: "3Gi"
-            cpu: "2"
-          limits:
-            memory: "4Gi"
-            cpu: "3"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-
+        - name: POSTGRES_DB
+          value: "keycloak_db"
+        - name: POSTGRES_USER
+          value: "keycloak"
+        - name: POSTGRES_PASSWORD
+          value: "keycloakpassword"
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: keycloak-postgres-pvc
