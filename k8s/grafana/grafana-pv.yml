@@ -10,4 +10,4 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath: # Use hostPath for local development; use a cloud storage class in production
-    path: /home/axilleas/Documents/Projects/CloudPlatformESP/k8s/pv/grafana
+    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/grafana
