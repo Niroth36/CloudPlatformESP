@@ -1,0 +1,65 @@
+upated grafana-deployment.yml
+
+kubectl apply -f grafana-deployment.yml
+kubectl delete pod -n cloud-platform -l app=grafana
+
+updated grafana-service.yml
+
+
+create the cloud-platform Realm in Keycloak
+Open Keycloak:
+
+URL: http://192.168.1.95:30008
+Login as Admin:
+Username: admin
+Password: adminpassword
+Create a New Realm:
+
+Click the dropdown menu (top-left).
+Click Create Realm.
+Realm Name: cloud-platform
+Click Create.
+
+create the grafana-client for OAuth
+Go to: Clients → Click Create Client.
+
+Client ID: grafana-client
+Client Type: OpenID Connect.
+
+Click Next.
+
+Enable OAuth2 Client Authentication:
+
+Client Authentication: ON (Grafana needs a client secret).
+Standard Flow: ✅ Enabled (Required for login via OAuth2).
+Direct Access Grants: ❌ Disabled.
+Click Save.
+
+Configure the Client for Grafana
+Open the grafana-client settings.
+
+Root URL: http://192.168.1.95:30000
+Valid Redirect URIs: http://192.168.1.95:30000/login/generic_oauth
+Web Origins: http://192.168.1.95:30000
+Click Save.
+
+Get the Client Secret
+Go to the Credentials tab.
+Copy the Client Secret.
+Update Grafana with the New Keycloak Details
+
+kubectl apply -f grafana-deployment.yml
+kubectl delete pod -n cloud-platform -l app=grafana
+
+Grafana is accessible at: 👉 http://192.168.1.95:30000
+
+Users → Create User → Set Password.
+
+✔ Grafana URL: http://192.168.1.95:30000
+✔ Keycloak URL: http://192.168.1.95:30008
+
+
+port forwarding:
+kubectl port-forward -n cloud-platform svc/grafana 3000:80
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
