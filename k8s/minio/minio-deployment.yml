@@ -24,6 +24,10 @@ spec:
           value: "admin"
         - name: MINIO_ROOT_PASSWORD
           value: "password"
+        - name: MINIO_DISABLE_ACCESS_KEY
+          value: "true"  # Disable access key authentication
+        - name: MINIO_DISABLE_SECRET_KEY
+          value: "true"  # Disable secret key authentication
         args:
         - server
         - /data

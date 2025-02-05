@@ -1,34 +1,62 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: keycloak-postgres
+  name: keycloak
   namespace: cloud-platform
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak-postgres
+      app: keycloak
   template:
     metadata:
       labels:
-        app: keycloak-postgres
+        app: keycloak
     spec:
       containers:
-      - name: postgres
-        image: postgres:15
-        ports:
-        - containerPort: 5432
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:latest
+        args: ["start-dev"]  # Run in development mode
         env:
-        - name: POSTGRES_DB
+        - name: KC_DB
+          value: "postgres"
+        - name: KC_DB_URL_HOST
+          value: "keycloak-postgres"  # Matches the PostgreSQL service name
+        - name: KC_DB_URL_DATABASE
           value: "keycloak_db"
-        - name: POSTGRES_USER
+        - name: KC_DB_USERNAME
           value: "keycloak"
-        - name: POSTGRES_PASSWORD
+        - name: KC_DB_PASSWORD
           value: "keycloakpassword"
-        volumeMounts:
-        - name: postgres-storage
-          mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: postgres-storage
-        persistentVolumeClaim:
-          claimName: keycloak-postgres-pvc
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "adminpassword"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KC_BOOTSTRAP_ADMIN_USERNAME
+          value: "admin"
+        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+          value: "password"
+        args:
+        - start-dev
+        resources:
+          requests:
+            memory: "3Gi"
+            cpu: "2"
+          limits:
+            memory: "4Gi"
+            cpu: "3"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10

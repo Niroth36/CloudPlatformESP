@@ -4,13 +4,16 @@ metadata:
   name: minio
   namespace: cloud-platform
 spec:
-  ports:
-  - port: 9000
-    targetPort: 9000
-    name: web
-  - port: 9001
-    targetPort: 9001
-    name: console
+  type: NodePort  # Enables both ClusterIP and NodePort
+  externalTrafficPolicy: Local  # Ensures correct routing of external traffic
   selector:
     app: minio
-  type: ClusterIP
+  ports:
+    - name: web
+      port: 9000         # ClusterIP access
+      targetPort: 9000   # MinIO container port
+      nodePort: 30090    # External NodePort (for ESP32)
+    - name: console
+      port: 9001
+      targetPort: 9001
+      nodePort: 30091    # External NodePort (for MinIO Console)

@@ -10,4 +10,4 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/thingsboard
+    path: /home/axilleas/Documents/Projects/CloudPlatformESP/k8s/pv/thingsboard

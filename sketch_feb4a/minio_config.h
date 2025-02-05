@@ -2,11 +2,11 @@
 #define MINIO_CONFIG_H
 
 // WiFi credentials
-const char* ssid = "karpouzi";
-const char* password = "123456789";
+const char* ssid = "AxilleasRooter";
+const char* password = "dekaeuro";
 
 // MinIO Service URL (Kubernetes ClusterIP or NodePort)
-#define MINIO_SERVICE "http://10.152.183.237:30090"
+#define MINIO_SERVICE "http://192.168.31.90:30090"
 #define MINIO_BUCKET "sensor-data"  // Bucket name
 
 // MinIO Access Credentials
