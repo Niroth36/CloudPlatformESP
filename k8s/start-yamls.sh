@@ -22,6 +22,7 @@ apply_files "*-pv.yml"
 apply_files "*-pvc.yml"
 apply_files "*-deployment.yml"
 apply_files "*-statefulset.yml"
+apply_files "*-ingress.yml"
 apply_files "*-service.yml"
 
 echo "✅ All Kubernetes resources applied successfully!"

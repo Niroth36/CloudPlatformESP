@@ -21,7 +21,6 @@ spec:
         - containerPort: 7070   # CoAP
         - containerPort: 5683   # LwM2M (UDP)
         - containerPort: 1883   # MQTT
-        - containerPort: 5432   # Expose PostgreSQL inside the container
         env:
         - name: TB_QUEUE_TYPE
           value: "in-memory"  # Use in-memory queue for simplicity; for production, use RabbitMQ or Kafka.

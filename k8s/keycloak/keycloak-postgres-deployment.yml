@@ -23,8 +23,10 @@ spec:
           value: "keycloak"
         - name: POSTGRES_PASSWORD
           value: "keycloakpassword"
+        - name: PGPORT  # Change the default PostgreSQL port
+          value: "5433"
         ports:
-        - containerPort: 5432
+        - containerPort: 5433  # Change from 5432
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data

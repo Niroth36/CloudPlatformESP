@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: thingsboard-postgres
+  name: keycloak-postgres
   namespace: cloud-platform
 spec:
   selector:
-    app: thingsboard
+    app: keycloak-postgres
   ports:
     - protocol: TCP
-      port: 5432
-      targetPort: 5432
+      port: 5433
+      targetPort: 5433
   type: ClusterIP

@@ -21,10 +21,8 @@ spec:
         env:
         - name: KC_DB
           value: "postgres"
-        - name: KC_DB_URL_HOST
-          value: "keycloak-postgres"
-        - name: KC_DB_URL_DATABASE
-          value: "keycloak_db"
+        - name: KC_DB_URL
+          value: "jdbc:postgresql://keycloak-postgres:5433/keycloak_db"
         - name: KC_DB_USERNAME
           value: "keycloak"
         - name: KC_DB_PASSWORD
@@ -33,34 +31,33 @@ spec:
           value: "admin"
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: "adminpassword"
-        - name: KC_BOOTSTRAP_ADMIN_USERNAME
-          value: "admin"
-        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
-          value: "password"
         ports:
         - containerPort: 8080
         resources:
           requests:
-            memory: "3Gi"
-            cpu: "2"
+            memory: "1Gi"
+            cpu: "500m"
           limits:
-            memory: "4Gi"
-            cpu: "3"
+            memory: "2Gi"
+            cpu: "1"
         volumeMounts:
         - name: keycloak-storage
-          mountPath: /opt/keycloak/data  # Persist Keycloak data
+          mountPath: /opt/keycloak/data
+
+        # Health checks
         livenessProbe:
           httpGet:
-            path: /
+            path: /health/live
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
         readinessProbe:
           httpGet:
-            path: /
+            path: /health/ready
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
+
       volumes:
       - name: keycloak-storage
         persistentVolumeClaim:

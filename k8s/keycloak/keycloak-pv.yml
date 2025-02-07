@@ -2,12 +2,12 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: keycloak-pv
-  namespace: cloud-platform
 spec:
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  hostPath:  # For local testing, use cloud storage for production
-    path: /home/niroth36/Documents/Projects/CloudPlatformESP/k8s/pv/keycloak-data
+  storageClassName: hostpath
+  hostPath:
+    path: /home/axilleas/Documents/Projects/CloudPlatformESP/k8s/pv/keycloak-data-pv
