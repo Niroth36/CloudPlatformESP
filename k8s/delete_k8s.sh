@@ -22,12 +22,15 @@ delete_files() {
 # Check argument
 case "$1" in
     all|"")  # Default is "all" if no argument is provided
-        delete_files "*-service.yml" "Services"
+        # delete_files "*-service.yml" "Services"
         delete_files "*-ingress.yml" "Ingresses"
         delete_files "*-deployment.yml" "Deployments"
         delete_files "*-statefulset.yml" "StatefulSets"
         delete_files "*-pvc.yml" "Persistent Volume Claims"
         delete_files "*-pv.yml" "Persistent Volumes"
+        ;;
+    svc)
+        delete_files "*-service.yml" "Services"
         ;;
     ingr)
         delete_files "*-ingress.yml" "Ingresses"
